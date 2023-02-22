@@ -7,3 +7,7 @@ Song::Song(char *_name, int duration): Duration(duration){
 int Song::getDuration(){
     return Duration;
 }
+
+char const *Song::getName(){
+    return name;
+}

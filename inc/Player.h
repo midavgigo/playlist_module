@@ -1,6 +1,7 @@
 #ifndef __PLAYER_H__
 #define __PLAYER_H__
 #include "Song.h"
+#include <thread>
 
 
 class Player{
@@ -11,7 +12,7 @@ public:
     bool getState();
 private:
     void start();
-    short step = 1;
+    short step = 0;
     void run();
     Song *song;
     bool waiting = true;

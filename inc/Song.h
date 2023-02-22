@@ -8,6 +8,8 @@ public:
     char name[255];
     Song(char *_name, int duration);
     int getDuration();
+    char const *getName();
+    Song(){}
 };
 
 #endif

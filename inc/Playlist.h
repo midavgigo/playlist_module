@@ -4,7 +4,10 @@
 #include "Player.h"
 #include <thread>
 
+class Playlist;
+
 class Node{
+protected:
     Node *prev, *next;
     Song song;
     Node(Song _song, Node *_prev, Node *_next){
@@ -12,6 +15,12 @@ class Node{
         prev = _prev;
         next = _next;
     }
+public:
+    Node(){}
+    Song getSong(){
+        return song;
+    }
+    friend class Playlist;
 };
 
 class Playlist{
@@ -20,11 +29,12 @@ private:
     Node *now;
     Player player;
 public:
-    Playlist();
+    Playlist(Song song);
     void Play();
     void Pause();
     void AddSong(Song song);
     void Next();
+    Song getNow();
 };
 
 #endif
