@@ -6,16 +6,17 @@
 
 class Player{
 public:
-    Player();
+    Player(){}
+    void start();
     void setSong(Song *song);
     void setState(bool play);
+    void stop();
     bool getState();
 private:
-    void start();
     short step = 0;
     void run();
-    Song *song;
-    bool waiting = true;
+    Song *song = nullptr;
+    bool working = true;
 };
 
 #endif
