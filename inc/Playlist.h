@@ -1,7 +1,6 @@
 #ifndef __PLATLIST_H__
 #define __PLATLIST_H__
 #include "Song.h"
-#include "Player.h"
 #include <thread>
 
 class Playlist;
@@ -23,17 +22,16 @@ public:
     friend class Playlist;
 };
 
+
 class Playlist{
-private:
+protected:
     Node first;
     Node *now;
-    Player player;
 public:
     Playlist(Song song);
-    void Play();
-    void Pause();
     void AddSong(Song song);
     void Next();
+    void Prev();
     Song getNow();
 };
 

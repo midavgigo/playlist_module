@@ -8,14 +8,6 @@ Playlist::Playlist(Song song){
     now = &first;
 }
 
-void Playlist::Play(){
-    player.setState(true);
-}
-
-void Playlist::Pause(){
-    player.setState(false);
-}
-
 void Playlist::AddSong(Song song){
     Node *nd = first.prev;
     nd->next = (Node *) malloc(sizeof(Node));
@@ -33,4 +25,7 @@ Song Playlist::getNow(){
 
 void Playlist::Next(){
     now = now->next;
+}
+void Playlist::Prev(){
+    now = now->prev;
 }

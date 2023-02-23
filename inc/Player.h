@@ -2,21 +2,26 @@
 #define __PLAYER_H__
 #include "Song.h"
 #include <thread>
-
+#include "Playlist.h"
+#include <iostream>
 
 class Player{
 public:
-    Player(){}
-    void start();
-    void setSong(Song *song);
+    Player(Playlist *pl);
     void setState(bool play);
-    void stop();
     bool getState();
-private:
+
+    void Next();
+    void Prev();
+    void stop();
+protected:
+    Playlist *playlist;
+    std::thread player_t;
     short step = 0;
     void run();
-    Song *song = nullptr;
-    bool working = true;
+    Song song;
+    bool pause = false;
+    bool can_rep = false;
 };
 
 #endif

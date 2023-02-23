@@ -1,16 +1,20 @@
-#include <iostream>
 #include "Playlist.h"
 #include "Song.h"
+#include "Player.h"
+#include <iostream>
+#include <thread>
+#include <chrono>
+#include <fstream>
+#include <cstring>
 
 int main(){
 	char *a = "a", *b = "b", *c = "c";
 	Song song(a, 100);
 	Playlist pl(song);
-	pl.AddSong(Song(b, 100));
-	pl.AddSong(Song(c, 100));
-	for(int i = 0; i < 10; i++){
-		std::cout<<pl.getNow().getName()<<"\n";
-		pl.Next();
+	Player pr(&pl);
+	pr.setState(true);
+	for(int i = 0; i >= 0; i++){
 	}
+	pr.stop();
 	return 0;
 }
