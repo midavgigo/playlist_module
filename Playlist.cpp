@@ -1,31 +1,54 @@
 #include "Playlist.h"
 #include <cstdlib>
 
-Playlist::Playlist(Song song){
-    first = Node(song, NULL, NULL);
+template<typename T>
+DoubleLinkedList<T>::DoubleLinkedList(T a){
+    first = Node<T>(a, NULL, NULL);
     first.prev = &first;
     first.next = &first;
     now = &first;
 }
 
-void Playlist::AddSong(Song song){
-    Node *nd = first.prev;
-    nd->next = (Node *) malloc(sizeof(Node));
-    Node *nw = nd->next;
+template<typename T>
+void DoubleLinkedList<T>::AddData(T a){
+    Node<T> *nd = first.prev;
+    nd->next = (Node<T> *) malloc(sizeof(Node<T>));
+    Node<T> *nw = nd->next;
 
-    nw->song = song;
+    nw->data = a;
     nw->prev = first.prev;
     nw->next = &first;
     first.prev = nw;
 }
 
+Playlist::Playlist(Song song){
+    dll = DoubleLinkedList<Song>(song);
+}
+
+void Playlist::AddSong(Song song){
+    dll.AddData(song);
+}
+template<typename T>
+T DoubleLinkedList<T>::getNow(){
+    return now->data;
+}
+
 Song Playlist::getNow(){
-    return now->getSong();
+    return dll.getNow();
+}
+template<typename T>
+void DoubleLinkedList<T>::Next(){
+    now = now->next;
 }
 
 void Playlist::Next(){
-    now = now->next;
+    dll.Next();
 }
-void Playlist::Prev(){
+template<typename T>
+void DoubleLinkedList<T>::Prev(){
     now = now->prev;
+}
+
+void Playlist::Prev(){
+    dll.Prev();
 }

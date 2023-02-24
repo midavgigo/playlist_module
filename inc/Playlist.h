@@ -4,29 +4,37 @@
 #include <thread>
 
 class Playlist;
+template<typename T> class DoubleLinkedList;
 
-class Node{
+template<typename T> class Node{
 protected:
     Node *prev, *next;
-    Song song;
-    Node(Song _song, Node *_prev, Node *_next){
-        song = _song;
+    T data;
+    Node(T _data, Node *_prev, Node *_next){
+        data = _data;
         prev = _prev;
         next = _next;
     }
-public:
     Node(){}
-    Song getSong(){
-        return song;
-    }
-    friend class Playlist;
+    friend class DoubleLinkedList<T>;
 };
 
+template<typename T> class DoubleLinkedList{
+private:
+    Node<T> first;
+    Node<T> *now;
+public:
+    DoubleLinkedList(T a);
+    T getNow();
+    void Prev();
+    void Next();
+    void AddData(T a);
+    DoubleLinkedList(){}
+};
 
 class Playlist{
 protected:
-    Node first;
-    Node *now;
+    DoubleLinkedList<Song> dll;
 public:
     Playlist(Song song);
     void AddSong(Song song);
