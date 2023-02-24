@@ -3,9 +3,10 @@
 #include <cstring>
 
 class Song{
+private:
     int Duration;
-public:
     char name[255];
+public:
     Song(char *_name, int duration);
     int getDuration();
     char const *getName();

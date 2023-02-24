@@ -7,15 +7,15 @@
 
 class Player{
 public:
-    Player(Playlist *pl);
+    Player();
     void setState(bool play);
     bool getState();
-
+    void setPlaylist(Playlist *pl);
     void Next();
     void Prev();
     void stop();
 protected:
-    Playlist *playlist;
+    Playlist *playlist = nullptr;
     std::thread player_t;
     short step = 0;
     void run();
