@@ -2,19 +2,27 @@
 #include <thread>
 #include <chrono>
 
-Player::Player(Playlist *pl){
+Player::Player(){
+    player_t = std::thread(&Player::run, this);
+}
+
+void Player::setPlaylist(Playlist *pl){
+    can_rep = false;
+    pause = true;
     playlist = pl;
     song = playlist->getNow();
-    player_t = std::thread(&Player::run, this);
+    can_rep = true;
 }
 
 void Player::run(){
     while(true){
-        std::cout<<song.getName()<<" is playing\n";
+        if(playlist==nullptr){
+            continue;
+        }
         int n = song.getDuration();
         for(int i = 1; i <= n && !pause; i+=step){
             std::this_thread::sleep_for(std::chrono::milliseconds(1));
-            std::cout<<"\r";
+            std::cout<<"\r "<<song.getName()<<": ";
             int border = 50*((double)i/(double)song.getDuration());
             for(int j = 0; j < 50; j++){
                 if(j <= border){
@@ -25,8 +33,8 @@ void Player::run(){
             }
             std::cout<<"|"<<i;
         }
-        std::cout<<"\n"<<song.getName()<<" is ended\n";
         if(!pause){
+            std::cout<<"\n";
             playlist->Next();
             song = playlist->getNow();
         }
