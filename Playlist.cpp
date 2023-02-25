@@ -2,30 +2,20 @@
 #include <cstdlib>
 
 Playlist::Playlist(Song song){
-    first = Node(song, NULL, NULL);
-    first.prev = &first;
-    first.next = &first;
-    now = &first;
+    dll.AddData(song);
 }
 
 void Playlist::AddSong(Song song){
-    Node *nd = first.prev;
-    nd->next = (Node *) malloc(sizeof(Node));
-    Node *nw = nd->next;
-
-    nw->song = song;
-    nw->prev = first.prev;
-    nw->next = &first;
-    first.prev = nw;
+    dll.AddData(song);
 }
 
 Song Playlist::getNow(){
-    return now->getSong();
+    return dll.getNow();
 }
 
 void Playlist::Next(){
-    now = now->next;
+    dll.Next();
 }
 void Playlist::Prev(){
-    now = now->prev;
+    dll.Prev();
 }
