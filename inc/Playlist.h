@@ -2,31 +2,11 @@
 #define __PLATLIST_H__
 #include "Song.h"
 #include <thread>
-
-class Playlist;
-
-class Node{
-protected:
-    Node *prev, *next;
-    Song song;
-    Node(Song _song, Node *_prev, Node *_next){
-        song = _song;
-        prev = _prev;
-        next = _next;
-    }
-public:
-    Node(){}
-    Song getSong(){
-        return song;
-    }
-    friend class Playlist;
-};
-
+#include "DLL.h"
 
 class Playlist{
 protected:
-    Node first;
-    Node *now;
+    DoubleLinkedList<Song> dll;
 public:
     Playlist(Song song);
     void AddSong(Song song);
