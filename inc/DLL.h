@@ -1,7 +1,6 @@
 #ifndef __DLL_H__
 #define __DLL_H__
-#include <cstdlib>
-
+#include<iostream>
 template<typename T> class DoubleLinkedList;
 
 template<typename T>
@@ -14,22 +13,21 @@ protected:
         prev = _prev;
         next = _next;
     }
-    Node(){}
     friend class DoubleLinkedList<T>;
 };
 
 template<typename T>
 class DoubleLinkedList{
 private:
-    Node<T> first;
+    Node<T> *first = nullptr;
     Node<T> *now = nullptr;
 public:
     DoubleLinkedList(){}
     DoubleLinkedList(T a){
-        first = Node<T>(a, nullptr, nullptr);
-        first.prev = &first;
-        first.next = &first;
-        now = &first;
+        first = new Node<T>(a, nullptr, nullptr);
+        first->prev = first;
+        first->next = first;
+        now = first;
     }
     T getNow(){
         return now->data;
@@ -42,23 +40,19 @@ public:
     }
     void AddData(T a){
         if(now == nullptr){
-            first = Node<T>(a, nullptr, nullptr);
-            first.prev = &first;
-            first.next = &first;
-            now = &first;
+            first = new Node<T>(a, nullptr, nullptr);
+            first->prev = first;
+            first->next = first;
+            now = first;
             return;
         }
-        Node<T> *nd = first.prev;
-        nd->next = (Node<T> *) malloc(sizeof(Node<T>));
+        Node<T> *nd = first->prev;
+        nd->next = new Node<T>(a, first->prev, first);
         Node<T> *nw = nd->next;
-
-        nw->data = a;
-        nw->prev = first.prev;
-        nw->next = &first;
-        first.prev = nw;
+        first->prev = nw;
     }
     void Begin(){
-        now = &first;
+        now = first;
     }
 
     void DelNow(){
@@ -66,12 +60,18 @@ public:
             return;
         }
         if(now->next == now){
+            Node<T> *old = now;
+            delete old;
             now = nullptr;
+            first = nullptr;
         }else{
-            now->prev = now->next;
-            Node<T> *node = now->next;
-            now->next = now->prev;
-            now = node;
+            Node<T> *old = now;
+            Node<T> *nxt = now->next;
+            Node<T> *prv = now->prev;
+            prv->next = nxt;
+            nxt->prev = prv;
+            now = nxt;
+            delete old;
         }
     }
 };
