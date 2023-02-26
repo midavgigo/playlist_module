@@ -57,6 +57,9 @@ public:
         nw->next = &first;
         first.prev = nw;
     }
+    void Begin(){
+        now = &first;
+    }
 };
 
 #endif
