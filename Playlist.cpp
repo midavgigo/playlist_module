@@ -1,7 +1,8 @@
 #include "Playlist.h"
-#include <cstdlib>
+#include <cstring>
 
-Playlist::Playlist(Song song){
+Playlist::Playlist(char *_name, Song song){
+    std::strcpy(name, _name);
     dll.AddData(song);
 }
 
@@ -18,4 +19,8 @@ void Playlist::Next(){
 }
 void Playlist::Prev(){
     dll.Prev();
+}
+
+char const *Playlist::getName(){
+    return name;
 }

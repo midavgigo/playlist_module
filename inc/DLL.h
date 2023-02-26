@@ -60,6 +60,20 @@ public:
     void Begin(){
         now = &first;
     }
+
+    void DelNow(){
+        if(now == nullptr){
+            return;
+        }
+        if(now->next == now){
+            now = nullptr;
+        }else{
+            now->prev = now->next;
+            Node<T> *node = now->next;
+            now->next = now->prev;
+            now = node;
+        }
+    }
 };
 
 #endif
