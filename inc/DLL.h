@@ -66,6 +66,9 @@ public:
             first = nullptr;
         }else{
             Node<T> *old = now;
+            if(now == first){
+                first = now->next;
+            }
             now->prev->next = now->next;
             now->next->prev = now->prev;
             now = now->next;
