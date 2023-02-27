@@ -66,11 +66,9 @@ public:
             first = nullptr;
         }else{
             Node<T> *old = now;
-            Node<T> *nxt = now->next;
-            Node<T> *prv = now->prev;
-            prv->next = nxt;
-            nxt->prev = prv;
-            now = nxt;
+            now->prev->next = now->next;
+            now->next->prev = now->prev;
+            now = now->next;
             delete old;
         }
     }
