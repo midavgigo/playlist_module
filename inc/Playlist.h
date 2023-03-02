@@ -7,12 +7,15 @@
 class Playlist{
 protected:
     DoubleLinkedList<Song> dll;
+    char name[255] = "ERROR NAME OF PLAYLIST";
 public:
-    Playlist(Song song);
+    Playlist(){}
+    Playlist(char *_name, Song song);
     void AddSong(Song song);
     void Next();
     void Prev();
     Song getNow();
+    char const *getName();
 };
 
 #endif

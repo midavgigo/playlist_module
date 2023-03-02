@@ -5,7 +5,7 @@
 class Song{
 private:
     int Duration;
-    char name[255];
+    char name[255] = "ERROR NAME OF SONG";
 public:
     Song(char *_name, int duration);
     int getDuration();
