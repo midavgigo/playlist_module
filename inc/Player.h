@@ -14,6 +14,8 @@ public:
     void Next();
     void Prev();
     void stop();
+    Playlist const *getPlaylist();
+    Song getPlayingSong();
 protected:
     Playlist *playlist = nullptr;
     std::thread player_t;

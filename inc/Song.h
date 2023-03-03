@@ -11,6 +11,9 @@ public:
     int getDuration();
     char const *getName();
     Song(){}
+    bool operator==(Song a) const{
+        return (Duration == a.getDuration()) && (strcmp(name, a.getName())==0);
+    }
 };
 
 #endif

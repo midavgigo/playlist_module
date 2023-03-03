@@ -71,3 +71,11 @@ void Player::Prev(){
 void Player::stop(){
     player_t.detach();
 }
+
+Playlist const *Player::getPlaylist(){
+    return playlist;
+}
+
+Song Player::getPlayingSong(){
+    return song;
+}

@@ -24,3 +24,7 @@ void Playlist::Prev(){
 char const *Playlist::getName(){
     return name;
 }
+
+bool Playlist::delSong(Song song){
+    return dll.DelData(song);
+}

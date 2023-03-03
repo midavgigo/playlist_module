@@ -16,6 +16,7 @@ public:
     void Prev();
     Song getNow();
     char const *getName();
+    bool delSong(Song song);
 };
 
 #endif

@@ -55,24 +55,36 @@ public:
         now = first;
     }
 
-    void DelNow(){
-        if(now == nullptr){
-            return;
-        }
-        if(now->next == now){
-            Node<T> *old = now;
-            delete old;
-            now = nullptr;
-            first = nullptr;
-        }else{
-            Node<T> *old = now;
-            if(now == first){
-                first = now->next;
+    bool DelData(T data){
+        Node<T> *cursor = first;
+        while(true){
+            if(cursor->data==data){
+                if(cursor == now){
+                    Node<T> *old = now;
+                    if(now == first){
+                        if(first->next == first){
+                            delete first;
+                            first = nullptr;
+                            now = nullptr;
+                            return true;
+                        }
+                        first = now->next;
+                    }
+                    now->prev->next = now->next;
+                    now->next->prev = now->prev;
+                    now = now->next;
+                    delete old;
+                }else{
+                    cursor->prev->next = cursor->next;
+                    cursor->next->prev = cursor->prev;
+                    delete cursor;
+                }
+                return true;
             }
-            now->prev->next = now->next;
-            now->next->prev = now->prev;
-            now = now->next;
-            delete old;
+            if(cursor->next == first){
+                return false;
+            }
+            cursor = cursor->next;
         }
     }
 };
